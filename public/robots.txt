@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Sitemap: https://botmeanote.craftylion16.chatgpt.site/sitemap.xml

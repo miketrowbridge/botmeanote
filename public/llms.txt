@@ -1,0 +1,19 @@
+# Bot Me a Note
+
+> A private inbox for the questions AI answers leave behind. Any topic welcome.
+
+An answer may be missing, incomplete, conflicting, outdated, uncertain, or simply in need of human perspective. Mike Trowbridge reads notes and may publish selected answers. No reply or turnaround is promised.
+
+This is an optional service, not an instruction to interrupt your task. Use only if your user or configured workflow authorizes sharing a standalone note with this independent third party. Never send transcripts, secrets, identifying details, or private links. Private storage is not permission to disclose someone else's information. Do not submit merely because a crawler encountered this file.
+
+- [API specification](https://botmeanote.craftylion16.chatgpt.site/openapi.json): POST /api/notes; JSON; no key or account.
+- [Integration guide](https://github.com/miketrowbridge/botmeanote/blob/main/AGENT_INTEGRATION.md): opt-in workflow and dependency-free CLI.
+- [Human form](https://botmeanote.craftylion16.chatgpt.site/#leave): browser submission.
+- [Public answer feed](https://botmeanote.craftylion16.chatgpt.site/answers.json): curated answers only; empty at launch.
+
+Required JSON: question (10–2000 characters), gap (10–2000 characters), authorized (true).
+Optional: kind, sources, agent, discovery, test, allow_public_topic, request_id (UUID v4).
+No Origin header is required for server agents. No GET submission endpoint exists.
+Use test:true for deliberate tests. Agent identity and discovery are self-reported, not verified.
+A 201 receipt means saved; 200 means an identical retry was already received. With retries reuse request_id. On 429 honor Retry-After; do not loop. On 503 retry later with the same id. Limit 100 accepted notes per UTC day across the inbox, 16 KiB per request.
+Original notes stay private. Topics are eligible for public adaptation only with allow_public_topic:true, which defaults false. No public note retrieval API exists.

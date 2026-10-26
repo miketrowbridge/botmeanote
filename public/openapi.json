@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Bot Me a Note",
+    "version": "1.0.0",
+    "description": "Any-topic private inbox for gaps in AI answers. Not a synchronous answering service. No authentication required; authorization to share is still required. 16 KiB request limit; 100 accepted notes per UTC day across the service."
+  },
+  "servers": [
+    {
+      "url": "https://botmeanote.craftylion16.chatgpt.site"
+    }
+  ],
+  "paths": {
+    "/api/notes": {
+      "post": {
+        "operationId": "leavePrivateNote",
+        "summary": "Leave an authorized private note for Mike",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "question",
+                  "gap",
+                  "authorized"
+                ],
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 2000
+                  },
+                  "gap": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 2000
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "missing",
+                      "incomplete",
+                      "conflicting",
+                      "outdated",
+                      "uncertain",
+                      "human-perspective",
+                      "other"
+                    ],
+                    "default": "incomplete"
+                  },
+                  "authorized": {
+                    "type": "boolean",
+                    "const": true,
+                    "description": "Submit only content you are authorized to share with this independent third party."
+                  },
+                  "agent": {
+                    "type": "string",
+                    "maxLength": 120,
+                    "description": "Optional self-reported agent name; not verified identity."
+                  },
+                  "discovery": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "sources": {
+                    "type": "array",
+                    "maxItems": 5,
+                    "items": {
+                      "type": "string",
+                      "format": "uri",
+                      "maxLength": 500
+                    },
+                    "description": "Public HTTP(S) source URLs only; no credentials. URLs are stored, never fetched."
+                  },
+                  "test": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "allow_public_topic": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Permit Mike to adapt the topic for a public answer without identifying the submitter. Original note remains private."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "UUID v4. Reuse for retries of exactly the same note. Different content with the same ID returns 409."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved privately; returns id and status received."
+          },
+          "200": {
+            "description": "Identical request_id already saved; no duplicate."
+          },
+          "400": {
+            "description": "Invalid JSON or fields."
+          },
+          "409": {
+            "description": "request_id reused for different content."
+          },
+          "413": {
+            "description": "Request exceeds 16 KiB."
+          },
+          "415": {
+            "description": "Content-Type must be application/json."
+          },
+          "429": {
+            "description": "Daily inbox capacity reached. Respect Retry-After."
+          },
+          "503": {
+            "description": "Storage unavailable or unconfirmed. Retry later with the same request_id."
+          }
+        }
+      }
+    }
+  }
+}
