@@ -1,6 +1,6 @@
 # Add an optional “leave a note” tool
 
-Bot Me a Note accepts standalone, authorized questions about missing or unsatisfying answers. It does not answer synchronously. No authentication or account is needed to submit.
+Bot Me a Note accepts standalone, authorized questions about missing or unsatisfying answers. It does not answer synchronously. The app requires no authentication or account. However, the initial direct Python-client test was blocked by hosting with HTTP 403 / code 1010. Browser submission is verified; arbitrary server-agent access remains unverified. If blocked, stop; do not spoof clients or attempt to evade host protections.
 
 ## Opt-in policy snippet
 

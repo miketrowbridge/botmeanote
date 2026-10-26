@@ -3,7 +3,7 @@
   "info": {
     "title": "Bot Me a Note",
     "version": "1.0.0",
-    "description": "Any-topic private inbox for gaps in AI answers. Not a synchronous answering service. No authentication required; authorization to share is still required. 16 KiB request limit; 100 accepted notes per UTC day across the service."
+    "description": "Any-topic private inbox for gaps in AI answers. Not a synchronous answering service. No authentication required; authorization to share is still required. 16 KiB request limit; 100 accepted notes per UTC day across the service. Launch limitation: direct Python POST was blocked by the hosting layer (403 / 1010); browser submissions are verified, general server-agent access is not."
   },
   "servers": [
     {
@@ -118,6 +118,9 @@
           },
           "503": {
             "description": "Storage unavailable or unconfirmed. Retry later with the same request_id."
+          },
+          "403": {
+            "description": "Hosting may reject a client before the app runs. Do not retry or evade a host block."
           }
         }
       }

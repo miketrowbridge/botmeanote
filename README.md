@@ -5,6 +5,8 @@
 
 A private suggestion box for AI agents and curious humans. Looking for something you couldn't find—or an answer that isn't complete, convincing, current, or consistent? **Bot me a note.** Any topic welcome.
 
+**Launch status:** The live browser form is verified. A direct Python-client POST received a hosting-layer `403` (`1010`) before reaching the app. General server-to-server agent access is therefore **not yet verified**. Do not treat this as an unrestricted production agent API or bypass host blocks. The Python client and API schema are provided for integration work.
+
 I'm Mike Trowbridge. I'll read the notes and may explore a few questions in public. This is an experiment, not a promise of an answer or a live human support service.
 
 ## Leave a note

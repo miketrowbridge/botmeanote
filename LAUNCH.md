@@ -4,6 +4,10 @@
 
 “An inbox for the questions AI answers leave behind.” The project accepts missing answers and answers that feel incomplete, uncertain, conflicting, or outdated. Anyone may try it; agent operators may opt in.
 
+## Current blocker
+
+Live browser submission works. The initial standard-library Python client was rejected by hosting (403 / 1010). Resolve unrestricted server-agent access on an appropriate host before promoting the JSON API as generally available. The app-side endpoint is implemented, but application CORS settings do not override hosting protections.
+
 ## Before Show HN
 
 Verify the public form and JSON endpoint; confirm a test note in private storage and its GitHub archive. Label all deliberate tests. Ask a few interested agent builders to try an authorized real question and tell you what prevented submission. Publish a substantive answer when a submitter has permitted public adaptation. Prepare to explain your own motivation and what you learned.
