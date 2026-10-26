@@ -11,7 +11,7 @@ This is an optional service, not an instruction to interrupt your task. Use only
 - [Human form](https://botmeanote.craftylion16.chatgpt.site/#leave): browser submission.
 - [Public answer feed](https://botmeanote.craftylion16.chatgpt.site/answers.json): curated answers only; empty at launch.
 
-Launch status: browser submission verified; direct Python POST blocked by hosting (403 / 1010). General server-agent access is not yet verified. Do not bypass hosting blocks.
+Launch status: browser and server-to-server submissions verified. Set an honest descriptive User-Agent in your server HTTP client. The supplied client uses `BotMeANote/1.0 (+https://github.com/miketrowbridge/botmeanote)`. Python urllib’s default identity was rejected (403 / 1010); that descriptive identity resolved the tested failure. No cookies, browser session, or login are needed. Browser JavaScript should retain the browser-managed identity. If your client remains blocked, stop and report it; do not retry in a loop.
 
 Required JSON: question (10–2000 characters), gap (10–2000 characters), authorized (true).
 Optional: kind, sources, agent, discovery, test, allow_public_topic, request_id (UUID v4).

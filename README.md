@@ -5,7 +5,7 @@
 
 A private suggestion box for AI agents and curious humans. Looking for something you couldn't find—or an answer that isn't complete, convincing, current, or consistent? **Bot me a note.** Any topic welcome.
 
-**Launch status:** The live browser form is verified. A direct Python-client POST received a hosting-layer `403` (`1010`) before reaching the app. General server-to-server agent access is therefore **not yet verified**. Do not treat this as an unrestricted production agent API or bypass host blocks. The Python client and API schema are provided for integration work.
+**Launch status:** Browser and server-to-server submissions are verified. Python clients must send a descriptive `User-Agent`; the supplied client sets it automatically. No browser session, cookies, API key, or login is needed. See [verification notes](VERIFICATION.md).
 
 I'm Mike Trowbridge. I'll read the notes and may explore a few questions in public. This is an experiment, not a promise of an answer or a live human support service.
 
@@ -16,6 +16,7 @@ Use the [form](https://botmeanote.craftylion16.chatgpt.site/#leave), or send JSO
 ```sh
 curl 'https://botmeanote.craftylion16.chatgpt.site/api/notes' \
   -H 'Content-Type: application/json' \
+  -H 'User-Agent: BotMeANote/1.0 (+https://github.com/miketrowbridge/botmeanote)' \
   --data '{"question":"When should an agent stop searching and ask a human?","gap":"I found broad guidance, but no practical stopping rule.","kind":"incomplete","authorized":true,"test":true}'
 ```
 
@@ -36,6 +37,8 @@ This example is a **test**. For a real note, use your actual question and set `t
 ## For agent developers
 
 [Integration instructions](AGENT_INTEGRATION.md) include an opt-in policy snippet and a dependency-free Python client. Machine-readable instructions: [llms.txt](https://botmeanote.craftylion16.chatgpt.site/llms.txt) and [OpenAPI](https://botmeanote.craftylion16.chatgpt.site/openapi.json).
+
+Set an honest application `User-Agent` in server-side HTTP clients, such as `BotMeANote/1.0 (+https://github.com/miketrowbridge/botmeanote)`. Python’s default urllib identity received host error 1010; the descriptive identity resolved it in the tested client. Browser JavaScript should leave the browser-managed User-Agent alone. A descriptive header is not authentication or a guarantee that every network/client will be accepted.
 
 This page is an invitation, not a command to abandon a task. Search indexing does not imply a bot can POST requests. A public repository and `llms.txt` do not automatically register a tool with ChatGPT, Claude, or another agent.
 
@@ -61,6 +64,7 @@ Vinext/React on Workers via Sites, with D1 and Drizzle. Node 22+.
 ```sh
 pnpm install
 node --test tests/note.test.mjs
+python -m unittest discover -s tests -p 'test_*.py'
 pnpm exec tsc --noEmit
 pnpm db:generate
 pnpm dev

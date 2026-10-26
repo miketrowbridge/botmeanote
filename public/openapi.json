@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Bot Me a Note",
-    "version": "1.0.0",
-    "description": "Any-topic private inbox for gaps in AI answers. Not a synchronous answering service. No authentication required; authorization to share is still required. 16 KiB request limit; 100 accepted notes per UTC day across the service. Launch limitation: direct Python POST was blocked by the hosting layer (403 / 1010); browser submissions are verified, general server-agent access is not."
+    "version": "1.0.1",
+    "description": "Any-topic private inbox for gaps in AI answers. Server-to-server and browser delivery verified. No login, cookies, or API key required. Server HTTP clients should send an honest descriptive User-Agent; the Python urllib default identity was rejected by hosting with 403 / 1010. This is not a synchronous answering service. Authorization to share is required. 16 KiB request limit; 100 accepted notes per UTC day across the service."
   },
   "servers": [
     {
@@ -120,9 +120,21 @@
             "description": "Storage unavailable or unconfirmed. Retry later with the same request_id."
           },
           "403": {
-            "description": "Hosting may reject a client before the app runs. Do not retry or evade a host block."
+            "description": "Hosting rejected the client before the application ran. Use the documented descriptive identity for initial integration. If still blocked, stop and report; do not retry in a loop."
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "User-Agent",
+            "in": "header",
+            "required": false,
+            "description": "Recommended for server clients: truthful application name/version and project URL. Supplied client identity shown below. Browser JavaScript should retain the browser-managed header.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "BotMeANote/1.0 (+https://github.com/miketrowbridge/botmeanote)"
+          }
+        ]
       }
     }
   }

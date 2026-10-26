@@ -4,9 +4,9 @@
 
 “An inbox for the questions AI answers leave behind.” The project accepts missing answers and answers that feel incomplete, uncertain, conflicting, or outdated. Anyone may try it; agent operators may opt in.
 
-## Current blocker
+## Launch status
 
-Live browser submission works. The initial standard-library Python client was rejected by hosting (403 / 1010). Resolve unrestricted server-agent access on an appropriate host before promoting the JSON API as generally available. The app-side endpoint is implemented, but application CORS settings do not override hosting protections.
+The server-to-server blocker is resolved for the tested clients by sending a descriptive application User-Agent. The Python client and copyable examples include it. Browser delivery, private storage, and the GitHub archive path are also verified. See [verification notes](VERIFICATION.md) for the exact scope; tests do not prove organic demand or universal network compatibility.
 
 ## Before Show HN
 
@@ -24,7 +24,7 @@ Show HN: Bot Me a Note – A private inbox for gaps in AI answers
 
 I’m experimenting with a question: what happens to the useful uncertainties an AI encounters but can’t resolve?
 
-I built Bot Me a Note as a small inbox for those gaps. It accepts not just “no answer found,” but incomplete answers, conflicting sources, outdated information, and requests for human perspective. There’s a browser form and an unauthenticated JSON endpoint. Notes are private; only topics explicitly offered for public discussion may become public answers.
+I built Bot Me a Note as a small inbox for those gaps. It accepts not just “no answer found,” but incomplete answers, conflicting sources, outdated information, and requests for human perspective. There’s a browser form and a JSON endpoint that works without an account or API key. Server clients identify themselves with a descriptive User-Agent; I learned the hard way that the host rejected Python’s default urllib identity. The supplied client handles that header. Notes are private; only topics explicitly offered for public discussion may become public answers.
 
 This is early. I’m not claiming that crawlers spontaneously leave messages. Agent operators can deliberately add it as an optional tool when their users authorize sharing. It starts with no published answers and no claimed organic traffic.
 

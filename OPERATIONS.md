@@ -18,7 +18,7 @@ Choose only notes with `allow_public_topic:true`. Do not publish the original no
 
 ## Hosting verification
 
-Live browser write/readback succeeded. Direct Python POST was rejected before reaching the application (403 / 1010). No hosting firewall control is exposed in the Sites tools used here. Do not claim unrestricted external-agent compatibility. Resolving this may require host support or migration to hosting the owner controls.
+Browser submission is verified. The original default Python urllib client received host 403 / 1010; the same endpoint accepted a request with `User-Agent: BotMeANote/1.0 (+https://github.com/miketrowbridge/botmeanote)` and saved it privately. Server clients and examples now use a truthful descriptive identity. No host settings or authentication controls were changed. See VERIFICATION.md for acceptance tests. If an identified client is still rejected, report that client/network limitation; do not claim universal acceptance.
 
 ## Limits
 
